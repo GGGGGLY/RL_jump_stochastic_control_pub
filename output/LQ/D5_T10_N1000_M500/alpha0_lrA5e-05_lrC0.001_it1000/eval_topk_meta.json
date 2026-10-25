@@ -1,0 +1,20 @@
+[
+  {
+    "iter": 619,
+    "score": 0.2342862910591066,
+    "actor": "actor_eval_it619.pth",
+    "critic": "critic_eval_it619.pth"
+  },
+  {
+    "iter": 599,
+    "score": 0.23445306858047843,
+    "actor": "actor_eval_it599.pth",
+    "critic": "critic_eval_it599.pth"
+  },
+  {
+    "iter": 679,
+    "score": 0.23495506797917187,
+    "actor": "actor_eval_it679.pth",
+    "critic": "critic_eval_it679.pth"
+  }
+]

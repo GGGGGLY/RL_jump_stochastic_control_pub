@@ -1,0 +1,20 @@
+[
+  {
+    "iter": 349,
+    "score": 0.40829549431800843,
+    "actor": "actor_pinn_u1_v0p2_it349.pth",
+    "critic": "critic_pinn_u1_v0p2_it349.pth"
+  },
+  {
+    "iter": 549,
+    "score": 0.4108529433608055,
+    "actor": "actor_pinn_u1_v0p2_it549.pth",
+    "critic": "critic_pinn_u1_v0p2_it549.pth"
+  },
+  {
+    "iter": 599,
+    "score": 0.4125788941979408,
+    "actor": "actor_pinn_u1_v0p2_it599.pth",
+    "critic": "critic_pinn_u1_v0p2_it599.pth"
+  }
+]

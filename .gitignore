@@ -1,0 +1,12 @@
+__pycache__/
+.DS_Store
+*.py[cod]
+.venv/
+venv/
+wandb/
+every_50_ckpts/
+# *.pth
+tmp/
+output/merton_pinn_0201_optimizer_fix_spline_clip_resnet0307_SAC.py
+scripts/time_inhomo/backup
+output/fix_control_err/best_setting_LQ_time_inhomogeneous_unified.py/loss_manuscript_alpha_0.05_std_None/net_width16_depth3_gamma0.05_not_clamp_log_std_max_lra1e-4/pre_onlycritic_smaller20itr_tdtarget_detachV1_Xi_10

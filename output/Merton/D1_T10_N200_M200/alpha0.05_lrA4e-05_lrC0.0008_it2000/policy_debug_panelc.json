@@ -1,0 +1,77 @@
+[
+  {
+    "t": 2.5,
+    "x": 11.857373237609863,
+    "note": "Panel (c) debug dump: PINN Gibbs (discrete on u_grid) vs Actor sampling.",
+    "pinn": {
+      "formula": "Discrete Gibbs on u_grid: p(u_i|x) ∝ w_i * exp(H(x,u_i)/gamma); logits = H/gamma + log(w)",
+      "uses": "Hamiltonian H (reward + drift + diffusion + jump) from PINN value network derivatives",
+      "t_used": false,
+      "gamma_entropy": 0.05,
+      "z_jump_alpha": 0.1,
+      "lam": 0.3,
+      "mu": 0.1,
+      "r": 0.05,
+      "sigma": 0.4,
+      "u_grid": {
+        "n_u": 400,
+        "min": -1.5,
+        "max": 2.5,
+        "median_du": 0.010025054216384888
+      },
+      "u_weights": {
+        "min": 0.00501251220703125,
+        "max": 0.0100250244140625,
+        "sum": 3.9999847412109375
+      },
+      "pinn_domain_x": {
+        "x_min": 0.0,
+        "x_max": 102.00000029802322
+      },
+      "policy_discrete": {
+        "support_min": -1.25,
+        "support_max": 2.25,
+        "prob_min": 2.085789816419492e-07,
+        "prob_max": 0.008247209712862968,
+        "prob_std": 0.0028862350154668093,
+        "entropy": 5.2972636222839355,
+        "mean": 0.6356465816497803,
+        "std": 0.42409422646837913,
+        "max_over_min_prob": 39539.984556163436
+      },
+      "heuristic_warning": "If H_range/gamma is small, exp(H/gamma) ~ 1 => Gibbs nearly uniform."
+    },
+    "actor": {
+      "type": "gaussian_two_stage",
+      "sample_space": "unknown (depends on actor implementation; see below fields)",
+      "params_train_actor_use_squash": true,
+      "params_train_delay_squash_steps": 30,
+      "params_train_squash_temp_init": 2.0,
+      "params_train_squash_temp_final": 1.0,
+      "pinn_u_min": -1.5,
+      "pinn_u_max": 2.5,
+      "actor_attr_delay_squash_steps": 30.0,
+      "actor_attr_squash_temp_init": 2.0,
+      "actor_attr_squash_temp_final": 1.0,
+      "forward_mu": {
+        "min": 0.07297676056623459,
+        "max": 0.07297676056623459,
+        "mean": 0.07297676056623459
+      },
+      "forward_log_std": {
+        "min": -0.6406126022338867,
+        "max": -0.6406126022338867,
+        "mean": -0.6406126022338867
+      },
+      "sample_u": {
+        "n": 20000,
+        "min": -0.8501187562942505,
+        "max": 1.881129503250122,
+        "mean": 0.5496025681495667,
+        "std": 0.41704320907592773,
+        "p01": -0.40411099791526794,
+        "p99": 1.4953116178512573
+      }
+    }
+  }
+]

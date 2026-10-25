@@ -1,0 +1,68 @@
+{
+  "equation": {
+    "mu": 0.5,
+    "sigma": 0.3,
+    "lambda": [
+      0.2,
+      0.225,
+      0.25,
+      0.275,
+      0.3
+    ],
+    "z": [
+      0.3,
+      0.275,
+      0.25,
+      0.225,
+      0.2
+    ],
+    "beta": 1.0,
+    "q2": 0.5,
+    "q1": 5.0,
+    "D": 5,
+    "T": 10.0,
+    "M": 500,
+    "N": 1000,
+    "Xi": [
+      [
+        5.0,
+        5.0,
+        5.0,
+        5.0,
+        5.0
+      ]
+    ]
+  },
+  "train": {
+    "lr_critic": 0.001,
+    "gamma_critic": 0.2,
+    "milestones_critic": [
+      5000,
+      50000,
+      300000
+    ],
+    "lr_actor": 5e-05,
+    "gamma_actor": 0.5,
+    "milestones_actor": [
+      3000,
+      50000,
+      300000
+    ],
+    "iteration": 1000,
+    "device": "cpu",
+    "weight_decay": 0,
+    "method": "PO_CRL",
+    "eval_every": 20,
+    "entropy_alpha": 0.05,
+    "p_tsallis": 1,
+    "gamma_soft": 0.0,
+    "actor_loss": "manuscript",
+    "deterministic_sigma_penalty": 0.05,
+    "actor_input_normalization": "center_scale",
+    "actor_state_scale": 1.0,
+    "state_coverage_std": 1.0,
+    "slope_diag_every": 20,
+    "output_dir": ".",
+    "policy_fixed_std": null
+  }
+}

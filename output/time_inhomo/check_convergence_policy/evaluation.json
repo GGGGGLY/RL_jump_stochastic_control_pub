@@ -1,0 +1,8 @@
+{
+  "benchmark_mode": "policy",
+  "value_relative_rmse": 0.0036914640550652963,
+  "mean_relative_rmse": 0.010366009313500948,
+  "control_error": 0.00022758224025612575,
+  "control_metric": "KL(exact||learned)",
+  "score": 0.001959523147660711
+}

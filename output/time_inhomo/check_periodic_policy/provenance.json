@@ -1,0 +1,6 @@
+{
+  "script": "best_setting_LQ_time_inhomogeneous_unified.py",
+  "sha256": "f72f323fa4365a1327df9ce5eea697e66ed76e48afd6df539b4399dd2450e1b7",
+  "residual": "martingale_subtracted",
+  "benchmark_mode": "policy"
+}

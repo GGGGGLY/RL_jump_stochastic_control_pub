@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "training": [],
+  "evaluation": [
+    {
+      "iteration": 699,
+      "score": 0.6291048526763916,
+      "Y_error": 0.07465827465057373,
+      "control_error": 1.1835514307022095,
+      "source": "checkpoint_reevaluation",
+      "seed": 2026
+    },
+    {
+      "iteration": 779,
+      "score": 0.6329907514154911,
+      "Y_error": 0.08324522525072098,
+      "control_error": 1.1827362775802612,
+      "source": "checkpoint_reevaluation",
+      "seed": 2026
+    },
+    {
+      "iteration": 979,
+      "score": 0.6301338076591492,
+      "Y_error": 0.05910611152648926,
+      "control_error": 1.201161503791809,
+      "source": "checkpoint_reevaluation",
+      "seed": 2026
+    }
+  ]
+}

@@ -1,0 +1,377 @@
+[
+  {
+    "t": 2.5,
+    "x": 11.890339107513428,
+    "note": "Panel (c) debug dump: PINN Gibbs (discrete on u_grid) vs Actor sampling.",
+    "pinn": {
+      "formula": "Discrete Gibbs on u_grid: p(u_i|x) ∝ w_i * exp(H(x,u_i)/gamma); logits = H/gamma + log(w)",
+      "uses": "Hamiltonian H (reward + drift + diffusion + jump) from PINN value network derivatives",
+      "t_used": false,
+      "gamma_entropy": 0.05,
+      "z_jump_alpha": 0.1,
+      "lam": 0.3,
+      "mu": 0.1,
+      "r": 0.05,
+      "sigma": 0.4,
+      "u_grid": {
+        "n_u": 400,
+        "min": -1.5,
+        "max": 2.5,
+        "median_du": 0.010025054216384888
+      },
+      "u_weights": {
+        "min": 0.00501251220703125,
+        "max": 0.0100250244140625,
+        "sum": 3.9999847412109375
+      },
+      "pinn_domain_x": {
+        "x_min": 0.0,
+        "x_max": 102.00000029802322
+      },
+      "policy_discrete": {
+        "support_min": -1.25,
+        "support_max": 2.25,
+        "prob_min": 2.066243069975826e-07,
+        "prob_max": 0.008247077465057373,
+        "prob_std": 0.0028861986938863993,
+        "entropy": 5.297275543212891,
+        "mean": 0.6365796327590942,
+        "std": 0.424099321221526,
+        "max_over_min_prob": 39913.39443502094
+      },
+      "heuristic_warning": "If H_range/gamma is small, exp(H/gamma) ~ 1 => Gibbs nearly uniform."
+    },
+    "actor": {
+      "type": "gaussian_two_stage",
+      "sample_space": "unknown (depends on actor implementation; see below fields)",
+      "params_train_actor_use_squash": true,
+      "params_train_delay_squash_steps": 30,
+      "params_train_squash_temp_init": 2.0,
+      "params_train_squash_temp_final": 1.0,
+      "pinn_u_min": -1.5,
+      "pinn_u_max": 2.5,
+      "actor_attr_delay_squash_steps": 30.0,
+      "actor_attr_squash_temp_init": 2.0,
+      "actor_attr_squash_temp_final": 1.0,
+      "forward_mu": {
+        "min": 0.12991875410079956,
+        "max": 0.12991875410079956,
+        "mean": 0.12991875410079956
+      },
+      "forward_log_std": {
+        "min": -0.6216511726379395,
+        "max": -0.6216511726379395,
+        "mean": -0.6216511726379395
+      },
+      "sample_u": {
+        "n": 20000,
+        "min": -0.810853898525238,
+        "max": 1.910620927810669,
+        "mean": 0.583328902721405,
+        "std": 0.41679027676582336,
+        "p01": -0.39241430163383484,
+        "p99": 1.5241398811340332
+      }
+    }
+  },
+  {
+    "t": 5.0,
+    "x": 14.224980983734131,
+    "note": "Panel (c) debug dump: PINN Gibbs (discrete on u_grid) vs Actor sampling.",
+    "pinn": {
+      "formula": "Discrete Gibbs on u_grid: p(u_i|x) ∝ w_i * exp(H(x,u_i)/gamma); logits = H/gamma + log(w)",
+      "uses": "Hamiltonian H (reward + drift + diffusion + jump) from PINN value network derivatives",
+      "t_used": false,
+      "gamma_entropy": 0.05,
+      "z_jump_alpha": 0.1,
+      "lam": 0.3,
+      "mu": 0.1,
+      "r": 0.05,
+      "sigma": 0.4,
+      "u_grid": {
+        "n_u": 400,
+        "min": -1.5,
+        "max": 2.5,
+        "median_du": 0.010025054216384888
+      },
+      "u_weights": {
+        "min": 0.00501251220703125,
+        "max": 0.0100250244140625,
+        "sum": 3.9999847412109375
+      },
+      "pinn_domain_x": {
+        "x_min": 0.0,
+        "x_max": 102.00000029802322
+      },
+      "policy_discrete": {
+        "support_min": -1.25,
+        "support_max": 2.25,
+        "prob_min": 8.80242652101515e-08,
+        "prob_max": 0.00853224378079176,
+        "prob_std": 0.002972193295136094,
+        "entropy": 5.263467311859131,
+        "mean": 0.654070258140564,
+        "std": 0.4099910948530595,
+        "max_over_min_prob": 96930.58795119336
+      },
+      "heuristic_warning": "If H_range/gamma is small, exp(H/gamma) ~ 1 => Gibbs nearly uniform."
+    },
+    "actor": {
+      "type": "gaussian_two_stage",
+      "sample_space": "unknown (depends on actor implementation; see below fields)",
+      "params_train_actor_use_squash": true,
+      "params_train_delay_squash_steps": 30,
+      "params_train_squash_temp_init": 2.0,
+      "params_train_squash_temp_final": 1.0,
+      "pinn_u_min": -1.5,
+      "pinn_u_max": 2.5,
+      "actor_attr_delay_squash_steps": 30.0,
+      "actor_attr_squash_temp_init": 2.0,
+      "actor_attr_squash_temp_final": 1.0,
+      "forward_mu": {
+        "min": 0.12963765859603882,
+        "max": 0.12963765859603882,
+        "mean": 0.12963765859603882
+      },
+      "forward_log_std": {
+        "min": -0.6690325736999512,
+        "max": -0.6690325736999512,
+        "mean": -0.6690325736999512
+      },
+      "sample_u": {
+        "n": 20000,
+        "min": -0.7678610682487488,
+        "max": 1.8691825866699219,
+        "mean": 0.5819811224937439,
+        "std": 0.39579275250434875,
+        "p01": -0.34777727723121643,
+        "p99": 1.4941762685775757
+      }
+    }
+  },
+  {
+    "t": 7.5,
+    "x": 16.752218029499055,
+    "note": "Panel (c) debug dump: PINN Gibbs (discrete on u_grid) vs Actor sampling.",
+    "pinn": {
+      "formula": "Discrete Gibbs on u_grid: p(u_i|x) ∝ w_i * exp(H(x,u_i)/gamma); logits = H/gamma + log(w)",
+      "uses": "Hamiltonian H (reward + drift + diffusion + jump) from PINN value network derivatives",
+      "t_used": false,
+      "gamma_entropy": 0.05,
+      "z_jump_alpha": 0.1,
+      "lam": 0.3,
+      "mu": 0.1,
+      "r": 0.05,
+      "sigma": 0.4,
+      "u_grid": {
+        "n_u": 400,
+        "min": -1.5,
+        "max": 2.5,
+        "median_du": 0.010025054216384888
+      },
+      "u_weights": {
+        "min": 0.00501251220703125,
+        "max": 0.0100250244140625,
+        "sum": 3.9999847412109375
+      },
+      "pinn_domain_x": {
+        "x_min": 0.0,
+        "x_max": 102.00000029802322
+      },
+      "policy_discrete": {
+        "support_min": -1.25,
+        "support_max": 2.25,
+        "prob_min": 2.8666962137435803e-08,
+        "prob_max": 0.009185988456010818,
+        "prob_std": 0.0031606548000127077,
+        "entropy": 5.189929962158203,
+        "mean": 0.6139757633209229,
+        "std": 0.38090741759288793,
+        "max_over_min_prob": 320438.1549733503
+      },
+      "heuristic_warning": "If H_range/gamma is small, exp(H/gamma) ~ 1 => Gibbs nearly uniform."
+    },
+    "actor": {
+      "type": "gaussian_two_stage",
+      "sample_space": "unknown (depends on actor implementation; see below fields)",
+      "params_train_actor_use_squash": true,
+      "params_train_delay_squash_steps": 30,
+      "params_train_squash_temp_init": 2.0,
+      "params_train_squash_temp_final": 1.0,
+      "pinn_u_min": -1.5,
+      "pinn_u_max": 2.5,
+      "actor_attr_delay_squash_steps": 30.0,
+      "actor_attr_squash_temp_init": 2.0,
+      "actor_attr_squash_temp_final": 1.0,
+      "forward_mu": {
+        "min": 0.1290370374917984,
+        "max": 0.1290370374917984,
+        "mean": 0.1290370374917984
+      },
+      "forward_log_std": {
+        "min": -0.7197675704956055,
+        "max": -0.7197675704956055,
+        "mean": -0.7197675704956055
+      },
+      "sample_u": {
+        "n": 20000,
+        "min": -0.7799451351165771,
+        "max": 1.8461153507232666,
+        "mean": 0.5753146409988403,
+        "std": 0.3778305649757385,
+        "p01": -0.3010362982749939,
+        "p99": 1.4451966285705566
+      }
+    }
+  },
+  {
+    "t": 10.0,
+    "x": 20.48945556640625,
+    "note": "Panel (c) debug dump: PINN Gibbs (discrete on u_grid) vs Actor sampling.",
+    "pinn": {
+      "formula": "Discrete Gibbs on u_grid: p(u_i|x) ∝ w_i * exp(H(x,u_i)/gamma); logits = H/gamma + log(w)",
+      "uses": "Hamiltonian H (reward + drift + diffusion + jump) from PINN value network derivatives",
+      "t_used": false,
+      "gamma_entropy": 0.05,
+      "z_jump_alpha": 0.1,
+      "lam": 0.3,
+      "mu": 0.1,
+      "r": 0.05,
+      "sigma": 0.4,
+      "u_grid": {
+        "n_u": 400,
+        "min": -1.5,
+        "max": 2.5,
+        "median_du": 0.010025054216384888
+      },
+      "u_weights": {
+        "min": 0.00501251220703125,
+        "max": 0.0100250244140625,
+        "sum": 3.9999847412109375
+      },
+      "pinn_domain_x": {
+        "x_min": 0.0,
+        "x_max": 102.00000029802322
+      },
+      "policy_discrete": {
+        "support_min": -1.25,
+        "support_max": 2.25,
+        "prob_min": 7.548302427551334e-09,
+        "prob_max": 0.009817794896662235,
+        "prob_std": 0.0033325240947306156,
+        "entropy": 5.123527526855469,
+        "mean": 0.5927807092666626,
+        "std": 0.35643369054790386,
+        "max_over_min_prob": 1300662.6312198678
+      },
+      "heuristic_warning": "If H_range/gamma is small, exp(H/gamma) ~ 1 => Gibbs nearly uniform."
+    },
+    "actor": {
+      "type": "gaussian_two_stage",
+      "sample_space": "unknown (depends on actor implementation; see below fields)",
+      "params_train_actor_use_squash": true,
+      "params_train_delay_squash_steps": 30,
+      "params_train_squash_temp_init": 2.0,
+      "params_train_squash_temp_final": 1.0,
+      "pinn_u_min": -1.5,
+      "pinn_u_max": 2.5,
+      "actor_attr_delay_squash_steps": 30.0,
+      "actor_attr_squash_temp_init": 2.0,
+      "actor_attr_squash_temp_final": 1.0,
+      "forward_mu": {
+        "min": 0.12830255925655365,
+        "max": 0.12830255925655365,
+        "mean": 0.12830255925655365
+      },
+      "forward_log_std": {
+        "min": -0.7786874771118164,
+        "max": -0.7786874771118164,
+        "mean": -0.7786874771118164
+      },
+      "sample_u": {
+        "n": 20000,
+        "min": -0.6792358756065369,
+        "max": 1.85158371925354,
+        "mean": 0.5747988224029541,
+        "std": 0.35308241844177246,
+        "p01": -0.24514713883399963,
+        "p99": 1.3887860774993896
+      }
+    }
+  },
+  {
+    "t": 2.5,
+    "x": 11.890338897705078,
+    "note": "Panel (c) debug dump: PINN Gibbs (discrete on u_grid) vs Actor sampling.",
+    "pinn": {
+      "formula": "Discrete Gibbs on u_grid: p(u_i|x) ∝ w_i * exp(H(x,u_i)/gamma); logits = H/gamma + log(w)",
+      "uses": "Hamiltonian H (reward + drift + diffusion + jump) from PINN value network derivatives",
+      "t_used": false,
+      "gamma_entropy": 0.05,
+      "z_jump_alpha": 0.1,
+      "lam": 0.3,
+      "mu": 0.1,
+      "r": 0.05,
+      "sigma": 0.4,
+      "u_grid": {
+        "n_u": 400,
+        "min": -1.5,
+        "max": 2.5,
+        "median_du": 0.010025054216384888
+      },
+      "u_weights": {
+        "min": 0.00501251220703125,
+        "max": 0.0100250244140625,
+        "sum": 3.9999847412109375
+      },
+      "pinn_domain_x": {
+        "x_min": 0.0,
+        "x_max": 102.00000029802322
+      },
+      "policy_discrete": {
+        "support_min": -1.25,
+        "support_max": 2.25,
+        "prob_min": 2.066243069975826e-07,
+        "prob_max": 0.008247077465057373,
+        "prob_std": 0.0028861986938863993,
+        "entropy": 5.297275543212891,
+        "mean": 0.6365796327590942,
+        "std": 0.424099321221526,
+        "max_over_min_prob": 39913.39443502094
+      },
+      "heuristic_warning": "If H_range/gamma is small, exp(H/gamma) ~ 1 => Gibbs nearly uniform."
+    },
+    "actor": {
+      "type": "gaussian_two_stage",
+      "sample_space": "unknown (depends on actor implementation; see below fields)",
+      "params_train_actor_use_squash": true,
+      "params_train_delay_squash_steps": 30,
+      "params_train_squash_temp_init": 2.0,
+      "params_train_squash_temp_final": 1.0,
+      "pinn_u_min": -1.5,
+      "pinn_u_max": 2.5,
+      "actor_attr_delay_squash_steps": 30.0,
+      "actor_attr_squash_temp_init": 2.0,
+      "actor_attr_squash_temp_final": 1.0,
+      "forward_mu": {
+        "min": 0.12991875410079956,
+        "max": 0.12991875410079956,
+        "mean": 0.12991875410079956
+      },
+      "forward_log_std": {
+        "min": -0.6216511726379395,
+        "max": -0.6216511726379395,
+        "mean": -0.6216511726379395
+      },
+      "sample_u": {
+        "n": 20000,
+        "min": -0.810853898525238,
+        "max": 1.910620927810669,
+        "mean": 0.583328902721405,
+        "std": 0.41679027676582336,
+        "p01": -0.39241430163383484,
+        "p99": 1.5241398811340332
+      }
+    }
+  }
+]
