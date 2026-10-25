@@ -132,7 +132,7 @@ python3 scripts/LQ/best_setting_LQ.py \
   --actor_path "$ACTOR_CKPT" --critic_path "$CRITIC_CKPT"
 ```
 
-读取 checkpoint 同目录的参数及历史记录，并生成评估/Top-k 图。 配合 checkpoint 路径使用 `--plot-history-only` 可重画历史图；缺少 `history.json` 的旧运行仅重新评估仍保留的检查点。除价值误差外，应关注控制或分布误差；`[actor-slope]` 日志记录均值斜率、跨维耦合与时间依赖诊断。alpha>0 且 D>1 时，这个旧入口的 `control_error` 是时间平均 KL 散度的平方根，不是百分比相对控制误差。
+读取 checkpoint 同目录的参数及历史记录，并生成评估/Top-k 图。 配合 checkpoint 路径使用 `--plot-history-only` 可重画历史图；缺少 `history.json` 的旧运行仅重新评估仍保留的检查点。除价值误差外，应关注控制或分布误差；`[actor-slope]` 日志记录均值斜率、跨维耦合与时间依赖诊断。已存的 `control_error` 和 Top-k 分数保留原检查点评分口径。`merton_train.pdf` 在 alpha=0 时展示同一步、同一状态下 actor 均值与基准控制的误差；alpha>0 时展示同一状态下 Gaussian KL 均值的平方根，不是百分比控制误差。
 
 **续训：** 在上述评估命令末尾添加 `--resume`，恢复权重并继续训练。该旧入口的续训不等同于完整优化器/RNG 状态恢复。
 

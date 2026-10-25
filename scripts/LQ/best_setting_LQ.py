@@ -416,7 +416,7 @@ class FBSNN(nn.Module): # Forward-Backward Stochastic Neural Network
         self.W_predict_set, self.P_predict_set   = self.W_eval, self.P_eval
 
         # Use your forward-only path (traj_only=True, predict=True) to compute errors
-        _, _, _, _, _, Y_error, control_error, _, _, mean_error = self.train_loop(
+        X, _, _, actions, policy_parameters, Y_error, control_error, _, _, mean_error = self.train_loop(
             itr=-1, traj_only=True, predict=True
         )
 
@@ -429,6 +429,52 @@ class FBSNN(nn.Module): # Forward-Backward Stochastic Neural Network
             "Y_error": self._to_float(Y_error),
             "control_error": (None if control_error is None else self._to_float(control_error)),
             "mu_gaussian_error": self._to_float(mean_error),
+            "action_metrics": self._aligned_action_metrics(X, actions, policy_parameters),
+        }
+
+    @torch.no_grad()
+    def _aligned_action_metrics(self, states, actions, policy_parameters):
+        """Compare means, sampled actions and benchmarks at the same pre-step states.
+
+        Buffer entry zero is an initial diagnostic sample. Entries 1..N
+        contain the policy and action used to advance states 0..N-1.
+        Relative RMSE retains the pointwise normalization used by the legacy
+        control metric, so changing the evaluated object does not rescale it.
+        The historical checkpoint-selection score is kept separately.
+        """
+        current_states = states[:, :-1]
+        mean = policy_parameters[:, 1:, :self.D]
+        std = policy_parameters[:, 1:, self.D:].exp()
+        sampled = actions[:, 1:]
+        if self.params_train["entropy_alpha"] == 0:
+            reference, _ = self.compute_exact_no_exploratory(current_states)
+            policy_error = None
+        else:
+            policy, _ = self.compute_exact_entropy(current_states)
+            reference = policy.loc
+            # Compute diagnostic KL in float64 so nearly identical Gaussian
+            # policies do not acquire a spurious error from float32 cancellation.
+            pointwise_kl = torch.distributions.kl_divergence(
+                Normal(mean.double(), std.double()),
+                Normal(reference.double(), policy.scale.double()),
+            ).sum(dim=-1)
+            policy_error = self._to_float(
+                pointwise_kl.mean().clamp_min(0).sqrt()
+            )
+        denominator = reference.square().sum(dim=-1) + 1e-12
+
+        def relative_rmse(error):
+            return self._to_float((error.square().sum(dim=-1) / denominator).mean().sqrt())
+
+        return {
+            "version": 1,
+            "mean_control_relative_rmse": relative_rmse(mean - reference),
+            "sampled_control_relative_rmse": relative_rmse(sampled - reference),
+            "exploration_relative_rmse": self._to_float(
+                (std.square().sum(dim=-1) / denominator).mean().sqrt()
+            ),
+            "mean_control_absolute_rmse": self._to_float((mean - reference).square().mean().sqrt()),
+            "policy_sqrt_mean_kl": policy_error,
         }
 
     @staticmethod
@@ -2266,6 +2312,7 @@ class FBSNN(nn.Module): # Forward-Backward Stochastic Neural Network
                 self.evaluation_history.append({
                     "iteration": int(it), "score": score,
                     "Y_error": detail["Y_error"], "control_error": detail["control_error"],
+                    "action_metrics": detail["action_metrics"],
                     "source": "training_evaluation",
                 })
                 self._save_training_history()
@@ -2337,6 +2384,7 @@ class FBSNN(nn.Module): # Forward-Backward Stochastic Neural Network
                 rebuilt.append({
                     "iteration": int(record["iter"]), "score": score,
                     "Y_error": detail["Y_error"], "control_error": detail["control_error"],
+                    "action_metrics": detail["action_metrics"],
                     "source": "checkpoint_reevaluation", "seed": 2026,
                 })
         finally:
@@ -2349,21 +2397,29 @@ class FBSNN(nn.Module): # Forward-Backward Stochastic Neural Network
                     setattr(self, name, previous_batch[name])
                 elif hasattr(self, name):
                     delattr(self, name)
-        self.evaluation_history = rebuilt
+        # Keep older observations whose checkpoints are no longer available.
+        # Only retained checkpoints can gain the additional action diagnostics.
+        merged = {r["iteration"]: r for r in self.evaluation_history}
+        merged.update({r["iteration"]: r for r in rebuilt})
+        self.evaluation_history = sorted(merged.values(), key=lambda r: r["iteration"])
         self._save_training_history()
 
     def plot_training_history(self):
         self._load_training_history()
-        if not self.evaluation_history:
+        if not any(r.get("action_metrics", {}).get("version") == 1 for r in self.evaluation_history):
             self._rebuild_checkpoint_evaluation_history()
         records = sorted(self.evaluation_history, key=lambda r: r["iteration"])
         reconstructed = all(r["source"] == "checkpoint_reevaluation" for r in records)
-        control_label = ("Control relative RMSE" if self.params_train["entropy_alpha"] == 0
-                         else "Policy error (sqrt mean KL)")
+        series = [[r["Y_error"] for r in records]]
+        labels = ["Value relative RMSE"]
+        if self.params_train["entropy_alpha"] == 0:
+            series.append([r.get("action_metrics", {}).get("mean_control_relative_rmse", float("nan")) for r in records])
+            labels.append("Mean control relative RMSE")
+        else:
+            series.append([r.get("action_metrics", {}).get("policy_sqrt_mean_kl", float("nan")) for r in records])
+            labels.append("Policy error (sqrt mean KL)")
         self.plot_list(
-            [[r["Y_error"] for r in records],
-             [float("nan") if r["control_error"] is None else r["control_error"] for r in records]],
-            "Evaluation error", ["Value relative RMSE", control_label],
+            series, "Evaluation error", labels,
             color=["#E7483D", "#6565AE"], ylabel_log=True,
             title="Saved-checkpoint evaluation" if reconstructed else None,
             filename="merton_train", iteration_values=[r["iteration"] for r in records],

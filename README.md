@@ -131,7 +131,7 @@ python3 scripts/LQ/best_setting_LQ.py \
   --actor_path "$ACTOR_CKPT" --critic_path "$CRITIC_CKPT"
 ```
 
-The script loads the configuration and training history next to the checkpoints and generates evaluation/Top-k plots. Use `--plot-history-only` with the checkpoint paths to redraw saved histories; runs without `history.json` are re-evaluated only at their retained checkpoints. Inspect control or distribution errors as well as value errors. The `[actor-slope]` diagnostics report the mean-policy slope, cross-dimensional coupling, and time dependence. For alpha>0 and D>1, this entrypoint's `control_error` is the square root of the time-averaged KL divergence, not a relative control error expressed as a percentage.
+The script loads the configuration and training history next to the checkpoints and generates evaluation/Top-k plots. Use `--plot-history-only` with the checkpoint paths to redraw saved histories; runs without `history.json` are re-evaluated only at their retained checkpoints. Inspect control or distribution errors as well as value errors. The `[actor-slope]` diagnostics report the mean-policy slope, cross-dimensional coupling, and time dependence. The stored `control_error` and Top-k scores retain their historical checkpoint-selection convention. In `merton_train.pdf`, alpha=0 reports the actor-mean error against the benchmark at the same pre-step states; alpha>0 reports the square root of mean Gaussian KL at those states, rather than a percentage control error.
 
 **Resuming:** Add `--resume` to the evaluation command to load weights and continue training. This older entrypoint does not restore the complete optimizer/RNG state.
 

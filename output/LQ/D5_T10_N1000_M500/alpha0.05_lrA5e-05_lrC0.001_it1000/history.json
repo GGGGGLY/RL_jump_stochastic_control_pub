@@ -7,6 +7,14 @@
       "score": 0.04407538287341595,
       "Y_error": 0.007268641144037247,
       "control_error": 0.08088212460279465,
+      "action_metrics": {
+        "version": 1,
+        "mean_control_relative_rmse": 0.012139841914176941,
+        "sampled_control_relative_rmse": 0.32401129603385925,
+        "exploration_relative_rmse": 0.32377833127975464,
+        "mean_control_absolute_rmse": 0.0025615235790610313,
+        "policy_sqrt_mean_kl": 0.07239927580937112
+      },
       "source": "checkpoint_reevaluation",
       "seed": 2026
     },
@@ -15,6 +23,14 @@
       "score": 0.04119273764081299,
       "Y_error": 0.005267682019621134,
       "control_error": 0.07711779326200485,
+      "action_metrics": {
+        "version": 1,
+        "mean_control_relative_rmse": 0.011402240954339504,
+        "sampled_control_relative_rmse": 0.3230668008327484,
+        "exploration_relative_rmse": 0.3228609561920166,
+        "mean_control_absolute_rmse": 0.0024023689329624176,
+        "policy_sqrt_mean_kl": 0.06888673982404565
+      },
       "source": "checkpoint_reevaluation",
       "seed": 2026
     },
@@ -23,6 +39,14 @@
       "score": 0.040184932528063655,
       "Y_error": 0.007268545683473349,
       "control_error": 0.07310131937265396,
+      "action_metrics": {
+        "version": 1,
+        "mean_control_relative_rmse": 0.009830442257225513,
+        "sampled_control_relative_rmse": 0.3224143385887146,
+        "exploration_relative_rmse": 0.32225459814071655,
+        "mean_control_absolute_rmse": 0.0020447918213903904,
+        "policy_sqrt_mean_kl": 0.0641535287049347
+      },
       "source": "checkpoint_reevaluation",
       "seed": 2026
     }
